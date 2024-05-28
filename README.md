@@ -1,7 +1,7 @@
 # booster-android
 
-# 기술
+## 기술
 - Jetpack Compose
-- MVVM
+- MVVM, Hilt
 - Coroutine, Flow
 - Retrofit2, OkHttp3
