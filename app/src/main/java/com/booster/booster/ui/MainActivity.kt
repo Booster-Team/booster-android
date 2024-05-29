@@ -6,6 +6,11 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.booster.booster.ui.screen.LoginScreen
+import com.booster.booster.ui.screen.MainScreen
 import com.booster.booster.ui.theme.BoosterTheme
 
 class MainActivity : ComponentActivity() {
@@ -15,6 +20,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             BoosterTheme {
+                MyApp()
             }
         }
     }
@@ -22,7 +28,14 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MyApp() {
-
+    val navController = rememberNavController()
+    NavHost(
+        navController = navController,
+        startDestination = "login"
+    ) {
+        composable("login") { LoginScreen(navController = navController)}
+        composable("main") { MainScreen(navController = navController)}
+    }
 }
 
 @Preview(showBackground = true)
