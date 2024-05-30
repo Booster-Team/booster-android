@@ -12,7 +12,9 @@ import androidx.navigation.compose.rememberNavController
 import com.booster.booster.ui.screen.LoginScreen
 import com.booster.booster.ui.screen.MainScreen
 import com.booster.booster.ui.theme.BoosterTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

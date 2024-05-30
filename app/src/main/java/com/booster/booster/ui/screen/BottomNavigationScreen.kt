@@ -31,7 +31,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.booster.booster.R
-import com.booster.booster.data.BottomNavigationData
+import com.booster.booster.model.BottomNavigationItem
 import com.booster.booster.ui.screen.bottom.CommunityScreen
 import com.booster.booster.ui.screen.bottom.ProfileScreen
 import com.booster.booster.ui.screen.bottom.TodayRoutineScreen
@@ -41,10 +41,10 @@ import com.booster.booster.ui.theme.BoosterTheme
 @Composable
 fun BottomNavigationScreen(navController: NavController) {
     val bottomDatas = listOf(
-        BottomNavigationData("오늘 루틴", R.drawable.dumbbell_fill, "오늘 루틴"),
-        BottomNavigationData("전체 루틴", R.drawable.square_stack_fill, "전체 루틴"),
-        BottomNavigationData("커뮤니티", R.drawable.ellipsis_bubble_fill, "커뮤니티"),
-        BottomNavigationData("프로필", R.drawable.person_crop_circle_fill, "프로필"),
+        BottomNavigationItem("오늘 루틴", R.drawable.dumbbell_fill, "오늘 루틴"),
+        BottomNavigationItem("전체 루틴", R.drawable.square_stack_fill, "전체 루틴"),
+        BottomNavigationItem("커뮤니티", R.drawable.ellipsis_bubble_fill, "커뮤니티"),
+        BottomNavigationItem("프로필", R.drawable.person_crop_circle_fill, "프로필"),
     )
 
     var selectedItem by remember { mutableStateOf(0) }

@@ -1,6 +1,6 @@
-package com.booster.booster.data
+package com.booster.booster.model
 
-data class BottomNavigationData(
+data class BottomNavigationItem(
     val title: String,
     val resourceId: Int,
     val route: String

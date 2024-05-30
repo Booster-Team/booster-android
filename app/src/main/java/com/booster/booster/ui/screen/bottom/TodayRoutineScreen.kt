@@ -39,7 +39,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.booster.booster.R
-import com.booster.booster.data.TodayExerciseData
+import com.booster.booster.model.TodayExerciseItem
 import com.booster.booster.ui.theme.BoosterTheme
 import com.booster.booster.ui.theme.LightBrandPrimary
 import com.booster.booster.ui.theme.LightLabelDisabledLight
@@ -152,26 +152,26 @@ fun TodayProgressScreen() {
 
 @Composable
 fun TodayLazyScreen() {
-    val todayExerciseDataList = listOf(
-        TodayExerciseData("암 풀 다운", "등", "4 세트 • 10 회"),
-        TodayExerciseData("벤치 프레스", "가슴", "3 세트 • 12 회"),
-        TodayExerciseData("스쿼트", "하체", "5 세트 • 8 회"),
-        TodayExerciseData("레그 프레스", "하체", "1 세트 • 20 회"),
-        TodayExerciseData("렛 풀 다운", "등", "4 세트 • 15 회"),
-        TodayExerciseData("데드리프트", "등", "5 세트 • 5 회"),
+    val todayExerciseItemLists = listOf(
+        TodayExerciseItem("암 풀 다운", "등", "4 세트 • 10 회"),
+        TodayExerciseItem("벤치 프레스", "가슴", "3 세트 • 12 회"),
+        TodayExerciseItem("스쿼트", "하체", "5 세트 • 8 회"),
+        TodayExerciseItem("레그 프레스", "하체", "1 세트 • 20 회"),
+        TodayExerciseItem("렛 풀 다운", "등", "4 세트 • 15 회"),
+        TodayExerciseItem("데드리프트", "등", "5 세트 • 5 회"),
     )
 
     LazyColumn(
         modifier = Modifier.fillMaxSize()
     ) {
-        items(todayExerciseDataList) { exercise ->
-            TodayOneSetScreen(todayExerciseData = exercise)
+        items(todayExerciseItemLists) { exercise ->
+            TodayOneSetScreen(todayExerciseItem = exercise)
         }
     }
 }
 
 @Composable
-fun TodayOneSetScreen(todayExerciseData: TodayExerciseData) {
+fun TodayOneSetScreen(todayExerciseItem: TodayExerciseItem) {
     var isChecked by remember { mutableStateOf(false) }
 
     Column(
@@ -185,7 +185,7 @@ fun TodayOneSetScreen(todayExerciseData: TodayExerciseData) {
             Column {
                 Row {
                     Text(
-                        text = todayExerciseData.name,
+                        text = todayExerciseItem.name,
                         fontSize = 16.sp,
                         fontFamily = FontFamily(Font(R.font.wantedsans_regular)),
                         fontWeight = FontWeight.Bold,
@@ -193,14 +193,14 @@ fun TodayOneSetScreen(todayExerciseData: TodayExerciseData) {
                         modifier = Modifier.padding(end = 15.dp)
                     )
                     Text(
-                        text = todayExerciseData.type,
+                        text = todayExerciseItem.type,
                         fontSize = 12.sp,
                         color = Color(0xFF82858B),
                     )
                 }
                 Row {
                     Text(
-                        text = todayExerciseData.setAndRep,
+                        text = todayExerciseItem.setAndRep,
                         fontSize = 12.sp,
                         color = Color(0xFF82858B),
                         modifier = Modifier.padding(top = 5.dp, start = 3.dp)
