@@ -54,6 +54,7 @@ fun TodayRoutineScreen() {
             .background(Color.White)
             .padding(top = 30.dp),
     ) {
+        // 아이콘이 안보임 체크해야 함
         Icon(
             painter = painterResource(id = R.drawable.book),
             modifier = Modifier
