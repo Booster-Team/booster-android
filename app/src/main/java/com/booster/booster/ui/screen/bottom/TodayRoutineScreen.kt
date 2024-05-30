@@ -1,6 +1,8 @@
 package com.booster.booster.ui.screen.bottom
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -9,10 +11,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -20,7 +22,12 @@ import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -44,21 +51,24 @@ fun TodayRoutineScreen() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(top = 30.dp)
+            .background(Color.White)
+            .padding(top = 30.dp),
     ) {
         Icon(
             painter = painterResource(id = R.drawable.book),
             modifier = Modifier
                 .width(30.dp)
-                .fillMaxWidth()
                 .height(30.dp)
-                .padding(end = 10.dp)
+                .padding(end = 20.dp)
                 .align(Alignment.End),
             contentDescription = null,
         )
         Scaffold(
+            contentColor = Color.White,
+            containerColor = Color.White,
             topBar = {
                 TopAppBar(
+                    colors = TopAppBarDefaults.topAppBarColors(Color.White),
                     title = {
                         Text(
                             text = "Today",
@@ -106,6 +116,7 @@ fun TodayMiddleScreen() {
             Text(
                 text = "Day 3 겨울",
                 fontSize = 18.sp,
+                color = LightLabelPrimary,
                 modifier = Modifier.padding(top = 10.dp)
             )
             Text(
@@ -161,13 +172,15 @@ fun TodayLazyScreen() {
 
 @Composable
 fun TodayOneSetScreen(todayExerciseData: TodayExerciseData) {
-    Column(
+    var isChecked by remember { mutableStateOf(false) }
 
+    Column(
+        modifier = Modifier.padding(end = 25.dp)
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(30.dp)
+                .padding(top = 30.dp, start = 30.dp, end = 30.dp, bottom = 25.dp)
         ) {
             Column {
                 Row {
@@ -197,12 +210,10 @@ fun TodayOneSetScreen(todayExerciseData: TodayExerciseData) {
 
             Spacer(modifier = Modifier.weight(1f))
 
-            Checkbox(
-                checked = false,
-                onCheckedChange = null,
-                modifier = Modifier
-                    .align(Alignment.CenterVertically)
-                    .padding(end = 20.dp)
+            CustomCheckBox(
+                checked = isChecked,
+                onCheckedChange = { isChecked = it },
+                modifier = Modifier.padding(top = 10.dp)
             )
         }
     }
@@ -211,6 +222,21 @@ fun TodayOneSetScreen(todayExerciseData: TodayExerciseData) {
         thickness = 1.5.dp,
         color = LightLabelDisabledLight,
         modifier = Modifier.padding(start = 20.dp, end = 20.dp)
+    )
+}
+
+@Composable
+fun CustomCheckBox(
+    checked: Boolean,
+    onCheckedChange: (Boolean) -> Unit,
+    modifier: Modifier
+) {
+    Image(
+        painter = painterResource(id = if (checked) R.drawable.checkbox_on else R.drawable.checkbox_off),
+        contentDescription = "CheckBox",
+        modifier = modifier
+            .size(30.dp)
+            .clickable { onCheckedChange(!checked) }
     )
 }
 

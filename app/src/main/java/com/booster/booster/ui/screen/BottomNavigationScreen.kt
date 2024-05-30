@@ -1,5 +1,6 @@
 package com.booster.booster.ui.screen
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -49,14 +50,18 @@ fun BottomNavigationScreen(navController: NavController) {
     var selectedItem by remember { mutableStateOf(0) }
 
     Scaffold(
+        containerColor = Color.White,
+        contentColor = Color.White,
         bottomBar = {
             NavigationBar(
                 containerColor = Color.White,
-                modifier = Modifier.padding(top = 20.dp)
+                modifier = Modifier
+                    .border(BorderStroke(1.dp, Color.LightGray))
             ) {
                 Row(
                     modifier = Modifier
-                        .fillMaxWidth(),
+                        .fillMaxWidth()
+                        .padding(top = 10.dp),
                     horizontalArrangement = Arrangement.SpaceAround
                 ) {
                     bottomDatas.forEachIndexed { index, bottomData ->
@@ -66,10 +71,14 @@ fun BottomNavigationScreen(navController: NavController) {
                                 .clickable { selectedItem = index }
                         ) {
                             Icon(
-                                modifier = Modifier.width(30.dp).height(30.dp),
+                                modifier = Modifier
+                                    .width(30.dp)
+                                    .height(30.dp),
                                 painter = painterResource(id = bottomData.resourceId),
                                 contentDescription = bottomData.title,
-                                tint = if (selectedItem == index) Color(0xFF282B2E) else Color(0xFFA8AAB1)
+                                tint = if (selectedItem == index) Color(0xFF282B2E) else Color(
+                                    0xFFA8AAB1
+                                )
                             )
 
                             Spacer(modifier = Modifier.padding(2.dp))
@@ -77,7 +86,9 @@ fun BottomNavigationScreen(navController: NavController) {
                             Text(
                                 text = bottomData.title,
                                 fontSize = 10.sp,
-                                color = if (selectedItem == index) Color(0xFF282B2E) else Color(0xFFA8AAB1),
+                                color = if (selectedItem == index) Color(0xFF282B2E) else Color(
+                                    0xFFA8AAB1
+                                ),
                                 modifier = Modifier.padding(top = 3.dp)
                             )
                         }
@@ -90,11 +101,7 @@ fun BottomNavigationScreen(navController: NavController) {
         Box(
             modifier = Modifier
                 .padding(paddingValues)
-                .fillMaxWidth()
-                .border(
-                    width = 1.dp,
-                    color = Color.LightGray
-                ),
+                .fillMaxWidth(),
             contentAlignment = Alignment.Center
         ) {
             when (selectedItem) {
