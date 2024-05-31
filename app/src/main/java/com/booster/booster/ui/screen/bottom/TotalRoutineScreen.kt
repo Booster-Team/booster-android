@@ -416,6 +416,14 @@ fun ChoiceTotalChip() {
 
 @Preview(showBackground = true)
 @Composable
+fun TotalRoutineScreenPreview() {
+    BoosterTheme {
+        TotalRoutineScreen()
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
 fun CalendarRoutinePreview() {
     CalendarRoutine()
 }
@@ -457,12 +465,4 @@ fun PopularRoutineSmallPreview() {
 @Composable
 fun PopularRoutinePreview() {
     PopularRoutine()
-}
-
-@Preview(showBackground = true)
-@Composable
-fun TotalRoutineScreenPreview() {
-    BoosterTheme {
-        TotalRoutineScreen()
-    }
 }
