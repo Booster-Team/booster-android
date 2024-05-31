@@ -20,6 +20,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -85,6 +86,11 @@ fun CommunityScreen() {
             verticalArrangement = Arrangement.Top
         ) {
             ChoiceCommunityChip()
+
+            Divider(
+                modifier = Modifier.fillMaxWidth(),
+                color = Color(0xFFEFEFF0)
+            )
 
             LazyColumn(
                 modifier = Modifier
@@ -187,7 +193,7 @@ fun CommunityItemScreen(
             text = title,
             fontSize = 16.sp,
             fontWeight = FontWeight.Bold,
-            color = Color(0xFF19191B),
+            color = CommunityChipBorderSelected,
             modifier = Modifier.padding(start = 30.dp, end = 20.dp, bottom = 10.dp)
         )
 
