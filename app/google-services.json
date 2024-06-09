@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "297556899584",
+    "project_id": "teamboost-8fc96",
+    "storage_bucket": "teamboost-8fc96.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:297556899584:android:a6b22dec86947aa32565e5",
+        "android_client_info": {
+          "package_name": "com.booster.booster"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "297556899584-0vl313jl5tf7b7pcas8c3vq957oo0o2o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.booster.booster",
+            "certificate_hash": "42b0c7ca57fe56f2516211ce38cfed0ea146dccd"
+          }
+        },
+        {
+          "client_id": "297556899584-i9js8ntvprb3i0ened1j2o083vug7b9i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBl4GDGxEhsuUv_uwFj3t8JUlheqKg69uU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "297556899584-i9js8ntvprb3i0ened1j2o083vug7b9i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
