@@ -1,5 +1,8 @@
 package com.booster.booster.ui.screen
 
+import android.app.Activity
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -21,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -28,18 +32,28 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.booster.booster.R
+import com.booster.booster.repository.GoogleLoginRepository
 import com.booster.booster.ui.theme.BoosterTheme
+import com.booster.booster.viewmodel.LoginViewModel
+import com.google.android.gms.auth.api.signin.GoogleSignIn
 
 @Composable
 fun LoginScreen(navController: NavController) {
-    val painter = painterResource(id = R.drawable.login_back)
+    val context = LocalContext.current as Activity
+    val viewModel: LoginViewModel = hiltViewModel()
+    val googleLoginRepository = GoogleLoginRepository(context)
 
-    Box(modifier = Modifier
-        .fillMaxSize()
-        .paint(painter, contentScale = ContentScale.Crop),
+    // viewmodel set해줌
+    viewModel.setRepository(googleLoginRepository)
+
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .paint(painterResource(id = R.drawable.login_back), contentScale = ContentScale.Crop),
         contentAlignment = Alignment.Center
     ) {
         Column(
@@ -52,7 +66,7 @@ fun LoginScreen(navController: NavController) {
             Spacer(modifier = Modifier.weight(1f))
             LoginMiddleView()
             Spacer(modifier = Modifier.weight(1f))
-            LoginBottomView(navController)
+            LoginBottomView(navController, viewModel)
         }
     }
 }
@@ -75,9 +89,21 @@ fun LoginMiddleView() {
 }
 
 @Composable
-fun LoginBottomView(navController: NavController) {
+fun LoginBottomView(navController: NavController, viewModel: LoginViewModel) {
+    val launcher =
+        rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) { result ->
+            val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
+            viewModel.handleSignInResult(task) { account ->
+                if (account != null) {
+                    navController.navigate("main")
+                } else {
+                    // 로그인 실패 처리
+                    println("로그인 실패")
+                }
+            }
+        }
     Button(
-        onClick = { navController.navigate("main")},
+        onClick = { launcher.launch(viewModel.signIn()) },
         modifier = Modifier
             .fillMaxWidth()
             .height(60.dp)
