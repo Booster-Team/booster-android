@@ -3,7 +3,6 @@ package com.booster.booster.ui.screen.bottom
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -15,6 +14,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -42,6 +44,8 @@ import com.booster.booster.R
 import com.booster.booster.model.TodayExerciseItem
 import com.booster.booster.ui.theme.BoosterTheme
 import com.booster.booster.ui.theme.LightBrandPrimary
+import com.booster.booster.ui.theme.LightBrandPrimaryLight
+import com.booster.booster.ui.theme.LightLabelAccent
 import com.booster.booster.ui.theme.LightLabelDisabledLight
 import com.booster.booster.ui.theme.LightLabelPrimary
 
@@ -82,16 +86,14 @@ fun TodayRoutineScreen() {
                 )
             }
         ) { paddingValues ->
-            Box(
+            Column(
                 modifier = Modifier
+                    .fillMaxSize()
                     .padding(paddingValues)
-                    .fillMaxWidth()
             ) {
-                Column {
-                    TodayMiddleScreen()
-                    TodayProgressScreen()
-                    TodayLazyScreen()
-                }
+                TodayMiddleScreen()
+                TodayProgressScreen()
+                TodayLazyScreen()
             }
         }
     }
@@ -163,10 +165,15 @@ fun TodayLazyScreen() {
     )
 
     LazyColumn(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier.fillMaxWidth()
     ) {
         items(todayExerciseItemLists) { exercise ->
             TodayOneSetScreen(todayExerciseItem = exercise)
+        }
+        item {
+            Spacer(modifier = Modifier.height(30.dp))
+            TodaySetDoneButton()
+            Spacer(modifier = Modifier.height(30.dp))
         }
     }
 }
@@ -227,6 +234,31 @@ fun TodayOneSetScreen(todayExerciseItem: TodayExerciseItem) {
 }
 
 @Composable
+fun TodaySetDoneButton() {
+    Button(
+        onClick = {
+
+        },
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(55.dp)
+            .padding(start = 20.dp, end = 20.dp),
+        elevation = ButtonDefaults.buttonElevation(
+            defaultElevation = 0.5.dp
+        ),
+        shape = RoundedCornerShape(0.dp),
+        colors = ButtonDefaults.buttonColors(
+            LightBrandPrimaryLight
+        )
+    ) {
+        Text(
+            text = "운동 완료하기",
+            color = LightLabelAccent
+        )
+    }
+}
+
+@Composable
 fun CustomCheckBox(
     checked: Boolean,
     onCheckedChange: (Boolean) -> Unit,
@@ -239,6 +271,12 @@ fun CustomCheckBox(
             .size(30.dp)
             .clickable { onCheckedChange(!checked) }
     )
+}
+
+@Preview
+@Composable
+fun TodaySetDoneButtonPreview() {
+    TodaySetDoneButton()
 }
 
 @Preview

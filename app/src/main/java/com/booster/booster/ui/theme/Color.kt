@@ -60,3 +60,8 @@ val DarkBackgroundTertiary = Color(0xFF0D0D0D)
 val CommunityChipBorderSelected = Color(0xFF19191B)
 val CommunityChipBorderUnselected = Color(0xFFEFEFF0)
 val CommunityChipBorderBody = Color(0xFFFAFAFA)
+
+
+// Dialog
+val DialogBack = Color(0xD1B3B3B3)
+val DialogBorder = Color(0x5C3C3C43)

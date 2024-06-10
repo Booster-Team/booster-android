@@ -111,7 +111,7 @@ fun LoginBottomView(navController: NavController, viewModel: LoginViewModel) {
         elevation = ButtonDefaults.buttonElevation(
             defaultElevation = 2.dp
         ),
-        shape = RoundedCornerShape(15.dp),
+        shape = RoundedCornerShape(0.dp),
         colors = ButtonDefaults.buttonColors(
             Color.Black
         )
