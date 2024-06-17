@@ -32,7 +32,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -48,6 +50,7 @@ import com.booster.booster.ui.theme.LightBrandPrimaryLight
 import com.booster.booster.ui.theme.LightLabelAccent
 import com.booster.booster.ui.theme.LightLabelDisabledLight
 import com.booster.booster.ui.theme.LightLabelPrimary
+import com.booster.booster.ui.theme.LightLabelTertiary
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -55,32 +58,36 @@ fun TodayRoutineScreen() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.White)
+            .paint(
+                painterResource(id = R.drawable.today_top_back),
+                contentScale = ContentScale.Crop
+            )
             .padding(top = 30.dp),
     ) {
         // 아이콘이 안보임 체크해야 함
         Icon(
-            painter = painterResource(id = R.drawable.book),
+            painter = painterResource(id = R.drawable.today_book_gray),
             modifier = Modifier
-                .width(30.dp)
-                .height(30.dp)
-                .padding(end = 20.dp)
+                .width(37.dp)
+                .height(44.dp)
+                .padding(end = 15.dp)
                 .align(Alignment.End),
             contentDescription = null,
         )
         Scaffold(
-            contentColor = Color.White,
-            containerColor = Color.White,
+            modifier = Modifier.background(Color.Transparent),
+            contentColor = Color.Transparent,
+            containerColor = Color.Transparent,
             topBar = {
                 TopAppBar(
-                    colors = TopAppBarDefaults.topAppBarColors(Color.White),
+                    colors = TopAppBarDefaults.topAppBarColors(Color.Transparent),
                     title = {
                         Text(
                             text = "Today",
                             modifier = Modifier.padding(start = 10.dp),
                             fontFamily = FontFamily(Font(resId = R.font.intertight_variablefont_wght)),
                             fontSize = 32.sp,
-                            fontWeight = FontWeight.Bold
+                            fontWeight = FontWeight.Medium
                         )
                     }
                 )
@@ -101,42 +108,63 @@ fun TodayRoutineScreen() {
 
 @Composable
 fun TodayMiddleScreen() {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(start = 25.dp, top = 30.dp)
-    ) {
-        Image(
-            painter = painterResource(id = R.drawable.temp_body),
-            contentDescription = "temp resource",
+    Column {
+        Row(
             modifier = Modifier
-                .width(165.dp)
-                .height(154.dp)
-        )
-        Column(
-            modifier = Modifier.padding(start = 20.dp)
+                .fillMaxWidth()
+                .padding(start = 25.dp, top = 20.dp)
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.temp_body_white),
+                contentDescription = "temp resource",
+                modifier = Modifier
+                    .width(165.dp)
+                    .height(154.dp)
+            )
+            Column(
+                modifier = Modifier
+                    .padding(start = 20.dp)
+            ) {
+                Text(
+                    text = "등 - 이두",
+                    fontSize = 18.sp,
+                    color = LightLabelPrimary,
+                    modifier = Modifier.padding(top = 5.dp)
+                )
+                Text(
+                    text = "Week 21, Day 3",
+                    fontSize = 16.sp,
+                    color = LightLabelTertiary,
+                    modifier = Modifier.padding(top = 2.dp)
+                )
+            }
+        }
+        Row(
+            modifier = Modifier
+                .padding(end = 25.dp)
+                .align(Alignment.End)
         ) {
             Text(
-                text = "Day 3 겨울",
-                fontSize = 18.sp,
-                color = LightLabelPrimary,
-                modifier = Modifier.padding(top = 10.dp)
+                text = "1",
+                fontSize = 15.sp,
+                color = LightLabelAccent,
             )
             Text(
-                text = "등 • 이두",
-                fontSize = 16.sp,
-                color = Color(0xFF61646B),
-                modifier = Modifier.padding(top = 5.dp)
+                text = " / ",
+                fontSize = 14.sp,
+                color = LightLabelDisabledLight,
+            )
+            Text(
+                text = "7",
+                fontSize = 15.sp,
+                color = LightLabelTertiary
+            )
+            Text(
+                text = " 개",
+                fontSize = 14.sp,
+                color = LightLabelTertiary
             )
         }
-        Text(
-            text = "7개",
-            fontSize = 16.sp,
-            color = Color(0xFFA8AAB1),
-            modifier = Modifier
-                .padding(top = 20.dp, start = 30.dp)
-                .align(Alignment.Bottom),
-        )
     }
 }
 
@@ -146,7 +174,7 @@ fun TodayProgressScreen() {
     LinearProgressIndicator(
         progress = 0.15f,
         modifier = Modifier
-            .padding(start = 20.dp, top = 30.dp, end = 20.dp)
+            .padding(top = 20.dp)
             .fillMaxWidth(),
         trackColor = LightLabelDisabledLight,
         color = LightBrandPrimary
@@ -165,7 +193,9 @@ fun TodayLazyScreen() {
     )
 
     LazyColumn(
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(Color.White)
     ) {
         items(todayExerciseItemLists) { exercise ->
             TodayOneSetScreen(todayExerciseItem = exercise)
@@ -183,12 +213,15 @@ fun TodayOneSetScreen(todayExerciseItem: TodayExerciseItem) {
     var isChecked by remember { mutableStateOf(false) }
 
     Column(
-        modifier = Modifier.padding(end = 25.dp)
+        modifier = Modifier
+            .padding(start = 8.dp, end = 8.dp)
+            .background(Color.White)
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 30.dp, start = 30.dp, end = 30.dp, bottom = 25.dp)
+                .background(Color.White)
+                .padding(top = 20.dp, start = 25.dp, end = 25.dp, bottom = 20.dp)
         ) {
             Column {
                 Row {

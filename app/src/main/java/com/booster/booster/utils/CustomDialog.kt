@@ -84,6 +84,7 @@ fun CustomDialog(
                             Text(
                                 text = dismissText,
                                 color = LightLabelAccent,
+                                fontSize = 15.sp
                             )
                         }
                         Divider(
@@ -101,6 +102,7 @@ fun CustomDialog(
                                 text = confirmText,
                                 color = LightLabelAccent,
                                 fontWeight = FontWeight.Bold,
+                                fontSize = 15.sp
                             )
                         }
                     }
