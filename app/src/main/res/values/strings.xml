@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Booster</string>
     <string name="defult_google_client_id">297556899584-0vl313jl5tf7b7pcas8c3vq957oo0o2o.apps.googleusercontent.com</string>
+    <string name="web_api_key">297556899584-i9js8ntvprb3i0ened1j2o083vug7b9i.apps.googleusercontent.com</string>
 </resources>

@@ -1,6 +1,7 @@
 package com.booster.booster.ui.screen
 
 import android.app.Activity
+import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Arrangement
@@ -19,6 +20,9 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.paint
@@ -39,7 +43,6 @@ import com.booster.booster.R
 import com.booster.booster.repository.GoogleLoginRepository
 import com.booster.booster.ui.theme.BoosterTheme
 import com.booster.booster.viewmodel.LoginViewModel
-import com.google.android.gms.auth.api.signin.GoogleSignIn
 
 @Composable
 fun LoginScreen(navController: NavController) {
@@ -92,16 +95,23 @@ fun LoginMiddleView() {
 fun LoginBottomView(navController: NavController, viewModel: LoginViewModel) {
     val launcher =
         rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) { result ->
-            val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
-            viewModel.handleSignInResult(task) { account ->
-                if (account != null) {
-                    navController.navigate("main")
-                } else {
-                    // 로그인 실패 처리
-                    println("로그인 실패")
-                }
+            viewModel.handleSignInResult(result.data)
+        }
+
+    val signInResult by viewModel.signInResult.collectAsState()
+
+    LaunchedEffect(signInResult) {
+        signInResult?.let { user ->
+            if (user != null) {
+                navController.navigate("main")
+                Log.d("Google Login Test", "uid: ${user.uid}, email: ${user.email}, displayName: ${user.displayName}")
+            } else {
+                // 로그인 실패 처리
+                println("로그인 실패")
             }
         }
+    }
+
     Button(
         onClick = { launcher.launch(viewModel.signIn()) },
         modifier = Modifier
