@@ -1,6 +1,7 @@
 package com.booster.booster.ui.screen.bottom
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -24,6 +25,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.booster.booster.R
 import com.booster.booster.ui.theme.BoosterTheme
 import com.booster.booster.ui.theme.LightLabelPrimary
@@ -33,7 +36,7 @@ import com.booster.booster.ui.theme.LightSeperatorPrimary
 
 
 @Composable
-fun ProfileScreen() {
+fun ProfileScreen(navController: NavController) {
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -43,7 +46,17 @@ fun ProfileScreen() {
             modifier = Modifier
                 .size(55.dp)
                 .align(Alignment.End)
-                .padding(end = 30.dp, top = 20.dp),
+                .padding(end = 30.dp, top = 20.dp)
+                .clickable {
+                    navController.navigate("settings") {
+                        popUpTo(navController.graph.startDestinationId) {
+                            saveState = true
+                        }
+                        launchSingleTop = true
+                        restoreState = true
+                    }
+                }
+            ,
         )
         Text(
             text = "Let's Boost!",
@@ -69,7 +82,6 @@ fun ProfileScreen() {
 
         Row(
             modifier = Modifier.padding(start = 30.dp, top = 30.dp)
-
         ) {
             Image(
                 painter = painterResource(id = R.drawable.profile_book),
@@ -181,6 +193,7 @@ fun DoneScreenPreview() {
 @Composable
 fun ProfileScreenPreview() {
     BoosterTheme {
-        ProfileScreen()
+        val navController = rememberNavController()
+        ProfileScreen(navController)
     }
 }

@@ -108,7 +108,7 @@ fun BottomNavigationScreen(navController: NavController) {
                 0 -> TodayRoutineScreen()
                 1 -> TotalRoutineScreen()
                 2 -> CommunityScreen()
-                3 -> ProfileScreen()
+                3 -> ProfileScreen(navController)
             }
         }
     }

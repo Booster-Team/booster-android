@@ -11,6 +11,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.booster.booster.ui.screen.LoginScreen
 import com.booster.booster.ui.screen.MainScreen
+import com.booster.booster.ui.screen.SettingScreen
+import com.booster.booster.ui.screen.bottom.ProfileScreen
 import com.booster.booster.ui.theme.BoosterTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -37,6 +39,8 @@ fun MyApp() {
     ) {
         composable("login") { LoginScreen(navController = navController)}
         composable("main") { MainScreen(navController = navController)}
+        composable("profile") { ProfileScreen(navController = navController) }
+        composable("settings"){  SettingScreen(navController = navController) }
     }
 }
 
