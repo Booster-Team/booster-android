@@ -28,4 +28,9 @@ class GoogleLoginRepository(
     fun getSignInResult(data: Intent?): Task<GoogleSignInAccount> {
         return GoogleSignIn.getSignedInAccountFromIntent(data)
     }
+
+    fun hasAccount(): Boolean {
+        val account = GoogleSignIn.getLastSignedInAccount(activity)
+        return account != null
+    }
 }

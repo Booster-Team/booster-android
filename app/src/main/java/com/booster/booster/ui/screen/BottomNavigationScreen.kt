@@ -34,8 +34,8 @@ import androidx.navigation.compose.rememberNavController
 import com.booster.booster.R
 import com.booster.booster.model.BottomNavigationItem
 import com.booster.booster.ui.screen.bottom.CommunityScreen
-import com.booster.booster.ui.screen.bottom.ProfileScreen
-import com.booster.booster.ui.screen.bottom.TodayRoutineScreen
+import com.booster.booster.ui.screen.bottom.profile.ProfileScreen
+import com.booster.booster.ui.screen.bottom.todayroutine.TodayRoutineScreen
 import com.booster.booster.ui.screen.bottom.TotalRoutineScreen
 import com.booster.booster.ui.theme.BoosterTheme
 
